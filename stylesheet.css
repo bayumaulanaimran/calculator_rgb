@@ -1,0 +1,125 @@
+@font-face {
+    font-family: 'Digital-7';
+    src: url('Digital-7.eot'); /* IE9 Compat Modes */
+    src: url('Digital-7.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('Digital-7.woff') format('woff'), /* Modern Browsers */
+         url('digital-7.ttf')  format('truetype'), /* Safari, Android, iOS */
+         url('Digital-7.svg#svgFontName') format('svg'); /* Legacy iOS */
+  }
+
+.calculator{
+    text-align: center;
+    margin: 0 auto;
+    padding-top: 200px;
+    width: 400px;
+}
+
+/* Untuk menampilkan operasi dari 
+hasil yang ditampilkan pada 
+calculator-screen */
+.calculator-prevop{
+    width: 100%;
+    height: 50px;
+    background-color: #404040;
+    color: #fff;
+    text-align: right;
+    font-size: 24px;
+    border: none;
+    padding: 0 20px;
+    box-sizing: border-box;
+
+    font-family: 'Digital-7';
+    font-weight: lighter;
+}
+
+.calculator-screen{
+    width: 100%;
+    height: 100px;
+    background-color: #252525;
+    color: #fff;
+    text-align: right;
+
+    /* ganti ukuran text dari 36px jadi 50px karena kurang besar untuk fon-family yang digunakan*/
+    font-size: 50px;
+
+    border: none;
+    padding: 0 20px;
+    box-sizing: border-box;
+
+    font-family: 'Digital-7';
+}
+
+.calculator-keys{
+    width: 100%;
+}
+
+.row{
+    display: flex;
+}
+
+button{
+    height: 80px;
+    background-color: gray;
+    border: 1px solid black;
+    font-size: 32px;
+    color: #fff;
+    width: 25%;
+    outline: none;
+}
+
+.operator, .equal-sign{
+    background-color: orange;
+}
+
+.delete{
+    background-color: red;
+}
+
+.minus {
+    background-color: darkred;
+}
+
+/* sementara di comment dulu
+template warna dari tugas. 
+mau mencoba pakai animasi
+
+button:hover {
+    background-color: darkgray;
+}
+
+.operator:hover, .equal-sign:hover{
+    background-color: darkorange;
+}
+
+.delete:hover{
+    background-color: darkred;
+}
+
+.minus:hover{
+    background-color: darkblue;
+}
+*/
+
+/* event ketika kursor ada diatas tombol */
+button:hover, .operator:hover, .equal-sign:hover, .delete:hover, .minus:hover{
+  animation-name: button_animation;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+
+/* event ketika tombol ditekan */
+button:active, .operator:active, .equal-sign:active, .delete:active, .minus:active{
+    padding: 5px;
+    background-color: white;
+    color: black;
+    animation-duration: 0s;
+    transition: 200ms;
+}
+
+/* animasi tombol buat ganti warna RGB */
+@keyframes button_animation {
+    0%   {background-color:red; left:0px; top:0px;}
+    33%  {background-color:blue; left:0px; top:0px;}
+    66%  {background-color:green; left:0px; top:0px;}
+    99%  {background-color:red; left:0px; top:0px;}
+}
