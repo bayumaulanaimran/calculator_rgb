@@ -79,6 +79,14 @@ button{
     background-color: darkred;
 }
 
+.all-clear {
+    width: 75%;
+}
+
+.perx, .percentage{
+    background-color: orange;
+}
+
 /* sementara di comment dulu
 template warna dari tugas. 
 mau mencoba pakai animasi

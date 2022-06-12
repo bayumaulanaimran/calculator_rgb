@@ -14,7 +14,7 @@ let currentNumber = '0';
 let tempOperation = '';
 
 const inputNumber = (number) => {
-    if(currentNumber === '0'){
+    if(currentNumber === '0' || currentNumber === 'Infinity' || currentNumber === 'NaN'){
         currentNumber = number;
     }else{
         currentNumber += number;
@@ -59,6 +59,8 @@ const inputOperator = (operator) => {
         case '/':
             tempOperator = ':';
             break;
+        case '%':
+            tempOperator = '%';
         default:
             break;
     }
@@ -106,6 +108,10 @@ const calculate = () => {
         case "/":
             result = parseFloat(prevNumber) / parseFloat(currentNumber);
             operator = ':';
+            break;
+        case "%":
+            result = parseFloat(prevNumber) % parseFloat(currentNumber);
+            operator = '%';
             break;
         default:
             break;
@@ -170,11 +176,11 @@ decimal.addEventListener('click', (event) => {
 const deleteNumber = document.querySelector('.delete');
 
 const deleteLastCurrentNumber = () => {
-    if(currentNumber.length===1||currentNumber.length===2 && currentNumber.includes('-')){
+    if(currentNumber.length===1||(currentNumber.length===2 && currentNumber.includes('-'))||currentNumber==='Infinity'||currentNumber==='NaN'){
         currentNumber = '0';
         return
     }
-    currentNumber = currentNumber.slice(0, currentNumber.length-1);
+    currentNumber = ''+parseFloat(currentNumber.slice(0, currentNumber.length-1))+'';
 }
 
 deleteNumber.addEventListener('click', (event) => {
@@ -205,6 +211,7 @@ percentage.addEventListener('click', (event) => {
     if(tempOperation.includes('=')){
         previousOperation('');
     }
+    
 })
 
 // mengambil elemen dengan class .minus yang akan digunakan dalam fungsi minusOfCurrentNumber
@@ -222,6 +229,26 @@ minus.addEventListener('click', (event) => {
     updateScreen(currentNumber);
 
     // jika data operasi sementara berisi '=' maka kosongkan tampilan prevop ketika pengguna menekan MIN di kalkulator
+    if(tempOperation.includes('=')){
+        previousOperation('');
+    }
+})
+
+// mengambil elemen dengan class .perx yang akan digunakan dalam fungsi onePerX
+const perx = document.querySelector('.perx');
+
+// fungsi yang digunakan untuk merubah angka pada layar kalkulator menjadi 1/ current number
+const onePerX = () => {
+    // agar tidak jadi kesalahan tipe data, maka data setelah dibuat negatif harus dibuat jadi string
+    currentNumber = ''+(1/parseFloat(currentNumber))+'';
+}
+
+// fungsi yang akan terpanggil ketika tombol dengan class .perx ditekan
+perx.addEventListener('click', (event) => {
+    onePerX();
+    updateScreen(currentNumber);
+
+    // jika data operasi sementara berisi '=' maka kosongkan tampilan prevop ketika pengguna menekan 1/x di kalkulator
     if(tempOperation.includes('=')){
         previousOperation('');
     }
